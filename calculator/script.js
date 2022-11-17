@@ -1,11 +1,24 @@
-// Clears the screen on click of C button.
 function clearScreen() {
-    document.getElementById("result").value = "";
+    result.value = ""
   }
-  // Displays entered value on screen.
-  function liveScreen(value) {
-    document.getElementById("result").value += value;
-  }
+
+
+function displayValue(e){
+  result.value += e.target.value;
+}
+
+function performOperation(){
+  let curValue = result.value;
+  let res = eval(curValue)
+  result.value = res
+}
+
+function backSpace(){
+  let res = result.value.slice(0,-1)
+  result.value = res
+}
+
+
   // Swaps the style sheet in order to  achieve dark mode.
   function switchTheme() {
     let darkMode = document.getElementById("dark-mode");
