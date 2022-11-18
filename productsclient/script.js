@@ -241,4 +241,67 @@ class ProductService{
           }
         }
       ]
+     getAllProducts(){
+      return this.data
+     } 
+     getProductDetails(id){
+      return this.data.find(p=>p.id==id)
+     }
 }
+
+var service = new ProductService()
+var allProducts = service.getAllProducts()
+var htmlData = ``
+allProducts.forEach(p=>{
+  htmlData+=`
+  <div class="col-3 mt-4">
+  <div class="card" style="width: 100%;">
+  <img src="${p.image}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${p.title}</h5>
+    <p class="card-text">${p.description}</p>
+    <p class="card-text">${p.category}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">${p.price}</li>
+    <li class="list-group-item">${p.rating}</li>
+    <li class="list-group-item">A third item</li>
+  </ul>
+  <div class="card-body">
+  <button class="btn btn-info" value="${p.id}" onclick="fetchProduct(event)">View More</button>
+    
+  </div>
+</div>  
+  </div>
+  `
+})
+document.querySelector("#id_result").innerHTML=htmlData
+function fetchProduct(e){
+  let id = e.target.value;
+  let details = service.getProductDetails(id);
+  let displayData = `
+  <div class="col-4"></div>
+<div class="col-4">
+
+<div class="card" style="width: 100%;">
+  <img src="${details.image}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">${details.title}</h5>
+    <p class="card-text">${details.description}</p>
+    <p class="card-text">${details.category}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">${details.price}</li>
+    <li class="list-group-item">${details.rating}</li>
+    
+  </ul>
+  
+</div>
+
+
+</div>
+<div class="col-4"></div>
+  `
+document.querySelector("#id_result").innerHTML=displayData
+}
+
